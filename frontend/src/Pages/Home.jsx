@@ -35,6 +35,15 @@ const Home = () => {
             }
     }
 
+    const arrowStyle = { 
+        width:"20px",
+        marginLeft:"5px", 
+        marginTop:"5px",
+        '&:hover': {
+            cursor: "pointer",
+            color: "#414B3B"}
+    }
+
         useEffect(() => {
             if (!isLoading) {
             if (count === 0) {
@@ -74,13 +83,14 @@ const Home = () => {
                     backgroundColor:"#F3EFE7", 
                     flexGrow:1,
                     alignItems:"flex-start",
+                    padding:"20px",
                 }}>
                     {
                         storeOverview.map((store, idx) => {
                             return (
-                                <div>
+                                <div style={{display:"flex", flexDirection:"column", justifyContent:"center", width: "90%", margin:"auto"}}>
                                     {(idx+1)%2!==0 ? 
-                                        <div style={{width: "100vw"}}>
+                                        <div>
                                             {StoresOverviewDisplay(store)}
                                             <Divider variant="middle" sx={{ flexGrow:1}} />
                                         </div>
@@ -93,39 +103,47 @@ const Home = () => {
                     }
                 </Box>
 
-            <Box sx={{
-            display: "flex",
-            justifyContent: "space-between", // This will separate the two Typography components
-            backgroundColor: "#F3EFE7",
-            flexDirection: "row",
-            padding: "0 20px",  // This is optional. Adds some space on the sides.
-            }}>
-
-                {count === 0 ? null:
-                <Typography variant="h6" component="div" 
-                onClick={() => clickHandler("decrease")}
-                sx ={{
-                    fontFamily: "Poppins",
-                    fontSize:"15px",
-                    display:"flex",
-                    justifyContent:"flex-start",
-                    color:"#99958C",
+                <Box sx={{
+                    display: "flex",
+                    justifyContent: "space-between", 
+                    backgroundColor: "#F3EFE7",
+                    flexDirection: "row",
+                    padding: "0 20px",
                 }}>
-                    <ArrowCircleLeftOutlinedIcon sx={{ width:"20px",marginLeft:"5px", marginTop:"2px" }}/>
-                </Typography>}
+                    {count === 0 ? null :
+                        <Typography variant="h6" component="div" 
+                            onClick={() => clickHandler("decrease")}
+                            sx ={{
+                                fontFamily: "Poppins",
+                                fontSize:"15px",
+                                display:"flex",
+                                justifyContent:"flex-start",
+                                color:"#99958C",
+                            }}
+                        >
+                            <ArrowCircleLeftOutlinedIcon sx={arrowStyle}/>
+                        </Typography>
+                    }
+                    <Box sx={{ flexGrow: 1 }}>  {/* <-- This ensures it takes up the maximum available space */}
+                    </Box>
                     <Typography variant="h6" component="div"
-                    onClick={() => clickHandler("increase")}
-                    sx ={{
-                        fontFamily: "Poppins",
-                        fontSize:"15px",
-                        display:"flex",
-                        justifyContent:"flex-end",
-                        color:"#99958C",
-                    }}>
+                        onClick={() => clickHandler("increase")}
+                        sx ={{
+                            fontFamily: "Poppins",
+                            fontSize:"15px",
+                            display:"flex",
+                            justifyContent:"flex-end",
+                            color:"#99958C",
+                            '&:hover': {
+                                cursor: "pointer",
+                                color: "#414B3B"}
+                        }}
+                    >
                         discover more 
-                        <ArrowCircleRightOutlinedIcon sx={{ width:"20px",marginLeft:"5px", marginTop:"2px" }}/>
-                </Typography>
-            </Box>
+                        <ArrowCircleRightOutlinedIcon sx={arrowStyle}/>
+                    </Typography>
+                </Box>
+
             </div>
             </>
         )}
