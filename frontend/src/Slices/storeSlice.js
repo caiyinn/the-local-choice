@@ -48,7 +48,7 @@ export const storesApiSlice = apiSlice.injectEndpoints({
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
-                        // Authorization: `Bearer ${token}`,
+                        Authorization: `Bearer ${token}`,
                     },
                     withCredentials: true,
                 };
