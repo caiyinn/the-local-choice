@@ -15,6 +15,7 @@ module.exports = {
 
 async function index(req, res){
     const stores = await Store.find({});
+    res.set('Access-Control-Allow-Origin', '*');
     // res.render("movies/index", { title: "All Movies", movies });
     res.json({ title: "All Stores", stores });
 }
