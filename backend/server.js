@@ -51,6 +51,22 @@ app.use((req, res, next) => {
   next();
 });
 
+// Set preflight
+app.options("*", (req, res) => {
+  console.log("preflight");
+  if (
+    req.headers.origin === "https://badmintown.onrender.com" &&
+    allowMethods.includes(req.headers["access-control-request-method"]) &&
+    allowHeaders.includes(req.headers["access-control-request-headers"])
+  ) {
+    console.log("pass");
+    return res.status(204).send();
+  } else {
+    console.log("fail");
+    return res.status(403).send();
+  }
+});
+
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
