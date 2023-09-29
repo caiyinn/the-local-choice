@@ -42,10 +42,12 @@ module.exports.login = async (req, res, next) => {
       
       // Create a token for the user which expires in 30mins
       const token = createSecretToken(user._id, user.role);
-      
       res
         .cookie("token", token, {
-          httpOnly: true,
+          httpOnly: false,
+          path: "/",
+          secure: true,
+          sameSite: 'None',
           maxAge: 1000 * 60 * 10,
         })
         .status(201)
