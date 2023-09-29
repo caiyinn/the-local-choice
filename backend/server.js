@@ -33,9 +33,8 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
 const corsOptions = {
-  origin: '*', // Replace with your React app's URL
+  origin: 'https://the-local-choice.vercel.app', // Replace with your React app's URL
   credentials: true, // This allows the server to accept credentials (cookies) from the client
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // Specify the HTTP methods you want to allow
 };
 
 app.use(cors(corsOptions));
