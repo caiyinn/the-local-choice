@@ -50,8 +50,6 @@ export const storesApiSlice = apiSlice.injectEndpoints({
                         "Content-Type": "application/json",
                         Authorization: `Bearer ${token}`,
                     },
-                    withCredentials: true,
-                    crossdomain: true
                 };
             },
             keepUnusedDataFor: 30
@@ -67,7 +65,6 @@ export const storesApiSlice = apiSlice.injectEndpoints({
                         "Content-Type": "application/json",
                         Authorization: `Bearer ${token}`,
                     },
-                    withCredentials: true,
                 };
             },
             keepUnusedDataFor: 30
