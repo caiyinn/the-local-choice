@@ -33,7 +33,7 @@ app.use(express.json({ limit: "50mb" }));
 app.use((req, res, next) => {
   res.setHeader(
     "Access-Control-Allow-Origin",
-    "https://your-frontend.com"
+    "https://the-local-choice.vercel.app"
   );
   res.setHeader(
     "Access-Control-Allow-Methods",
