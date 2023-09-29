@@ -49,6 +49,12 @@ module.exports.login = async (req, res, next) => {
           secure: true,
           sameSite: 'None',
           maxAge: 1000 * 60 * 10,
+        }).cookie("user", user, {
+          httpOnly: false,
+          path: "/",
+          secure: true,
+          sameSite: 'None',
+          maxAge: 1000 * 60 * 10,
         })
         .status(201)
         .json({ message: "User logged in successfully", success: true, token, user });

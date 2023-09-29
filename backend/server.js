@@ -33,7 +33,7 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
 app.use(cors({
-  origin: "https://red-splendid-cheetah.cyclic.cloud", 
+  origin: ['http://localhost:3000', /\.vercel\.app$/, /\.cyclic\.cloud$/], 
   credentials: true
 }));
 
