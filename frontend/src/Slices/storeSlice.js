@@ -51,6 +51,7 @@ export const storesApiSlice = apiSlice.injectEndpoints({
                         Authorization: `Bearer ${token}`,
                     },
                     withCredentials: true,
+                    crossdomain: true
                 };
             },
             keepUnusedDataFor: 30
