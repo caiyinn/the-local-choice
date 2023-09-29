@@ -28,18 +28,14 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 app.use(express.json({ limit: "50mb" }));
 // Set up CORS to allow React app to make requests to this API
-// app.use(cors());
-const corsOptions = {
-  origin: "https://the-local-choice.vercel.app",
-  credentials: true, // This allows the server to accept credentials from the client
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-};
-
-app.use(cors(corsOptions));
-
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
+
+app.use(cors({
+  origin: ['http://localhost:5173', /\.vercel\.app$/, /\.cyclic\.cloud$/], 
+  credentials: true
+}));
 
 app.use(logger("dev"));
 app.use(express.json());
