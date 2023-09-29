@@ -32,10 +32,13 @@ app.use(express.json({ limit: "50mb" }));
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
-app.use(cors({
-  origin: ['http://localhost:3000', /\.vercel\.app$/, /\.cyclic\.cloud$/], 
-  credentials: true
-}));
+const corsOptions = {
+  origin: 'https://the-local-choice.vercel.app', // Replace with your React app's URL
+  credentials: true, // This allows the server to accept credentials (cookies) from the client
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // Specify the HTTP methods you want to allow
+};
+
+app.use(cors(corsOptions));
 
 app.use(logger("dev"));
 app.use(express.json());
