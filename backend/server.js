@@ -28,49 +28,25 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 app.use(express.json({ limit: "50mb" }));
 // Set up CORS to allow React app to make requests to this API
-app.use(cors())
+// app.use(cors());
+const corsOptions = {
+  origin: "https://the-local-choice.vercel.app",
+  credentials: true, // This allows the server to accept credentials from the client
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+};
 
-// app.use((req, res, next) => {
-//   res.setHeader(
-//     "Access-Control-Allow-Origin",
-//     "https://the-local-choice.vercel.app"
-//   );
-//   res.setHeader(
-//     "Access-Control-Allow-Methods",
-//     "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS,CONNECT,TRACE"
-//   );
-//   res.setHeader(
-//     "Access-Control-Allow-Headers",
-//     "Content-Type, Authorization, X-Content-Type-Options, Accept, X-Requested-With, Origin, Access-Control-Request-Method, Access-Control-Request-Headers"
-//   );
-//   res.setHeader("Access-Control-Allow-Credentials", true);
-//   res.setHeader("Access-Control-Allow-Private-Network", true);
-//   //  Firefox caps this at 24 hours (86400 seconds). Chromium (starting in v76) caps at 2 hours (7200 seconds). The default value is 5 seconds.
-//   res.setHeader("Access-Control-Max-Age", 7200);
+app.use(
+  cors({
+    origin: ["http://localhost:3000", /\.vercel\.app$/, /\.render\.com$/],
+    credentials: true,
+  })
+);
 
-//   next();
-// });
-
-// // Set preflight
-// app.options("*", (req, res) => {
-//   console.log("preflight");
-//   if (
-//     req.headers.origin === "https://badmintown.onrender.com" &&
-//     allowMethods.includes(req.headers["access-control-request-method"]) &&
-//     allowHeaders.includes(req.headers["access-control-request-headers"])
-//   ) {
-//     console.log("pass");
-//     return res.status(204).send();
-//   } else {
-//     console.log("fail");
-//     return res.status(403).send();
-//   }
-// });
+app.use(cors(corsOptions));
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
-
 
 app.use(logger("dev"));
 app.use(express.json());
@@ -86,7 +62,6 @@ app.use("/stores", storeUserRouter);
 app.use("/profile", profileRouter);
 
 app.use("/", stripeRouter);
-
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -106,7 +81,7 @@ app.use(function (err, req, res, next) {
 
 // removed this line because it was causing the server to crash
 // app.listen(process.env.PORT, () => console.log(`Server running on port ${process.env.PORT}`))
-db.on('connected', function() {
+db.on("connected", function () {
   // Start the server only when the database is connected
   app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
