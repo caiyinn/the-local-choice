@@ -15,8 +15,9 @@ The Local Choice is a web platform built to connect and raise awareness of vibra
 
   - MERN Stack: MongoDB, Express.js, React, and Node.js are the core technologies for building a full-stack web application.
 
-- **Hosting:**
-  - Cyclic: The website is hosted on the Cyclic platform, ensuring high availability and performance.
+- **Deployment:**
+  - Render: The backend is hosted on the Render.
+  - Vercel: The frontend is hosted on Vercel
 
 ## Approach
 
