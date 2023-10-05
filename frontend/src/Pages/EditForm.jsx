@@ -64,14 +64,15 @@ const EditForm = () => {
             url: `${process.env.REACT_APP_SERVER_URL}/config/stores/${id}`,
             headers: {
                 "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
             },
             data: form,
         })
         .then(function (response) {
             console.log(response);
-            if (response.status === 201) {
+            if (response.status === 200) {
                 console.log("Created successfully");
-                setSnackbarMessage("Store created successfully!");
+                setSnackbarMessage("Store updated successfully!");
                 setSnackbarSeverity("success");
                 setOpenSnackbar(true);
                 setTimeout(() => {

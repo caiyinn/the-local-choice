@@ -125,13 +125,12 @@ async function createOrder(req, res) {
     });
 
     // update the store inventory
-    cartItems.forEach(async (item) => {
+    for (const item of cartItems) {
       const store = await Store.findById(item.storeId);
-      const product = store.products.id(item.id); 
-      product.quantity -= item.quantity; // update the quantity
-
-      await store.save(); // save the store
-    });
+      const product = store.products.id(item.id);
+      product.quantity -= item.quantity;
+      await store.save();
+    }
     
     await order.save();
     res.status(201).json({ title: "Update and create order", order });
